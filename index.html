@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Something for Gunnu ♡</title>
+<title>For Gunnu ♡</title>
 
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
 
@@ -24,36 +24,35 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
     padding: 20px;
+    overflow-x: hidden;
+    position: relative;
 }
 
-body::before {
-    content: "";
+/* BACKGROUND GLOW */
+.glow {
     position: fixed;
-    width: 450px;
-    height: 450px;
-    background: #a52d63;
-    filter: blur(180px);
-    opacity: .22;
-    top: -180px;
-    left: -150px;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    filter: blur(150px);
+    opacity: .2;
     pointer-events: none;
 }
 
-body::after {
-    content: "";
-    position: fixed;
-    width: 400px;
-    height: 400px;
-    background: #713c9c;
-    filter: blur(180px);
-    opacity: .18;
-    bottom: -180px;
-    right: -120px;
-    pointer-events: none;
+.glow.one {
+    background: #d64e91;
+    top: -150px;
+    left: -100px;
 }
 
+.glow.two {
+    background: #7743a5;
+    bottom: -150px;
+    right: -100px;
+}
+
+/* MAIN CARD */
 .container {
     width: 100%;
     max-width: 540px;
@@ -63,16 +62,25 @@ body::after {
     padding: 48px 30px;
     background: rgba(255,255,255,.035);
     border: 1px solid rgba(255,255,255,.09);
-    border-radius: 25px;
+    border-radius: 26px;
     backdrop-filter: blur(20px);
-    box-shadow: 0 25px 100px rgba(0,0,0,.45);
-    animation: appear 1.2s ease;
+    box-shadow: 0 25px 100px rgba(0,0,0,.5);
+}
+
+/* PAGE TRANSITIONS */
+.page {
+    display: none;
+    animation: appear .8s ease forwards;
+}
+
+.page.active {
+    display: block;
 }
 
 @keyframes appear {
     from {
         opacity: 0;
-        transform: translateY(25px);
+        transform: translateY(20px);
     }
     to {
         opacity: 1;
@@ -80,11 +88,33 @@ body::after {
     }
 }
 
+/* TYPOGRAPHY */
 .tag {
     color: #d58eae;
     font-size: 10px;
     letter-spacing: 5px;
     text-transform: uppercase;
+    margin-bottom: 35px;
+}
+
+h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 9vw, 52px);
+    font-weight: 500;
+    line-height: 1.25;
+    margin-bottom: 18px;
+}
+
+h1 span {
+    color: #e9a0bd;
+    font-style: italic;
+}
+
+.subtitle {
+    color: #aaa1ad;
+    font-size: 13px;
+    line-height: 1.9;
+    letter-spacing: .5px;
     margin-bottom: 35px;
 }
 
@@ -101,29 +131,22 @@ body::after {
     50% { transform: scale(1.18); }
 }
 
-h1 {
+/* CONFESSION TEXT */
+.message {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(36px, 9vw, 52px);
-    font-weight: 500;
-    line-height: 1.2;
-    margin-bottom: 17px;
+    color: #e9dce5;
+    font-size: 17px;
+    line-height: 1.9;
+    text-align: center;
+    max-width: 420px;
+    margin: 25px auto;
+    white-space: pre-line;
+    overflow-wrap: break-word;
 }
 
-h1 span {
-    color: #e9a0bd;
-    font-style: italic;
-}
-
-.subtitle {
-    color: #aaa1ad;
-    font-size: 13px;
-    letter-spacing: 1px;
-    line-height: 1.8;
-    margin-bottom: 38px;
-}
-
+/* BUTTONS */
 button {
-    font-family: inherit;
+    font-family: 'DM Sans', sans-serif;
     cursor: pointer;
     transition: .3s ease;
 }
@@ -144,23 +167,10 @@ button {
     box-shadow: 0 10px 35px rgba(214,93,145,.45);
 }
 
-#confession, #finalPage {
-    display: none;
-    animation: appear 1s ease;
-}
-
-.message {
-    font-family: 'Playfair Display', serif;
-    color: #e9dce5;
-    font-size: 17px;
-    line-height: 1.9;
-    margin: 25px 0;
-    white-space: pre-line;
-}
-
 .question {
     font-family: 'Playfair Display', serif;
-    font-size: 25px;
+    font-size: 24px;
+    line-height: 1.5;
     margin: 30px 0 25px;
 }
 
@@ -168,7 +178,7 @@ button {
     display: flex;
     flex-direction: column;
     gap: 13px;
-    max-width: 280px;
+    max-width: 290px;
     margin: auto;
 }
 
@@ -194,38 +204,43 @@ button {
     transform: translateY(-3px);
 }
 
-.response {
-    display: none;
-    animation: appear 1s ease;
-    margin-top: 25px;
-}
-
-.response h2 {
+/* RESPONSE PAGE */
+.response-title {
     font-family: 'Playfair Display', serif;
     color: #f0a2c1;
-    font-size: 29px;
-    margin-bottom: 15px;
+    font-size: 30px;
+    margin: 20px 0;
 }
 
-.response p {
+.response-text {
     color: #c9bdc9;
-    line-height: 1.8;
-    font-size: 14px;
+    font-size: 15px;
+    line-height: 1.9;
 }
 
+/* FINAL PAGE */
 .final-text {
     font-family: 'Playfair Display', serif;
     font-size: 21px;
     color: #e9dce5;
     line-height: 1.9;
-    margin: 25px 0;
+    margin: 30px auto;
 }
 
 .final-text span {
     color: #f0a2c1;
     font-style: italic;
+    font-size: 26px;
 }
 
+.final-tag {
+    color: #d58eae;
+    font-size: 10px;
+    letter-spacing: 4px;
+    margin-top: 25px;
+}
+
+/* FOOTER */
 .footer {
     margin-top: 40px;
     font-size: 10px;
@@ -233,14 +248,15 @@ button {
     letter-spacing: 2px;
 }
 
+/* FLOATING PARTICLES */
 .particle {
     position: fixed;
     bottom: -30px;
     color: #e98bb2;
     opacity: 0;
     pointer-events: none;
-    animation: float 9s linear forwards;
     z-index: 1;
+    animation: float 9s linear forwards;
 }
 
 @keyframes float {
@@ -256,32 +272,42 @@ button {
     }
 }
 
+/* MOBILE */
 @media(max-width:480px) {
     .container {
-        padding: 40px 22px;
+        padding: 40px 21px;
     }
 
     .message {
         font-size: 16px;
+        line-height: 1.85;
     }
 
     .question {
-        font-size: 22px;
+        font-size: 21px;
+    }
+
+    .final-text {
+        font-size: 19px;
     }
 }
+
 </style>
 </head>
 
 <body>
 
+<div class="glow one"></div>
+<div class="glow two"></div>
+
 <div class="container">
 
     <div class="tag">A little something special</div>
 
-    <div class="heart">♡</div>
-
     <!-- PAGE 1: OPENING -->
-    <div id="opening">
+    <section class="page active" id="page1">
+
+        <div class="heart">♡</div>
 
         <h1>Hey, <span>Gunnu.</span></h1>
 
@@ -289,14 +315,17 @@ button {
             There's something I've been wanting to tell you...
         </p>
 
-        <button class="primary" onclick="openLetter()">
+        <button class="primary" onclick="nextPage(2)">
             Open this little surprise ✨
         </button>
 
-    </div>
+    </section>
+
 
     <!-- PAGE 2: CONFESSION -->
-    <div id="confession">
+    <section class="page" id="page2">
+
+        <div class="heart">♡</div>
 
         <h1>Just for <span>You.</span></h1>
 
@@ -318,19 +347,23 @@ button {
 
         </div>
 
-    </div>
+    </section>
 
-    <!-- PAGE 3: RESPONSE -->
-    <div class="response" id="response">
 
-        <h2 id="responseTitle"></h2>
+    <!-- PAGE 3: HER RESPONSE -->
+    <section class="page" id="page3">
 
-        <p id="responseText"></p>
+        <div class="heart">♡</div>
 
-    </div>
+        <h2 class="response-title" id="responseTitle"></h2>
 
-    <!-- PAGE 4: FINAL REVEAL -->
-    <div id="finalPage">
+        <p class="response-text" id="responseText"></p>
+
+    </section>
+
+
+    <!-- PAGE 4: FINAL PRANK REVEAL -->
+    <section class="page" id="page4">
 
         <div class="heart">♡</div>
 
@@ -338,17 +371,22 @@ button {
 
         <div class="final-text">
             Don't take it seriously... 😂
+
             <br><br>
+
             <span>I was just joking!</span>
+
             <br><br>
+
             Or was I? 👀❤️
         </div>
 
-        <p style="color:#d58eae; font-size:11px; letter-spacing:3px;">
+        <p class="final-tag">
             JUST KIDDING... MAYBE ♡
         </p>
 
-    </div>
+    </section>
+
 
     <div class="footer">
         MADE WITH A LITTLE COURAGE ♡
@@ -356,11 +394,11 @@ button {
 
 </div>
 
+
 <script>
 
 // CONFESSION MESSAGE
-const confession =
-`Hey Gunnu,
+const confession = `Hey Gunnu,
 
 I don't really know how to put this into perfect words, but I wanted to be honest with you.
 
@@ -371,12 +409,33 @@ I don't want to make any promises I cannot keep. I just want you to know that I 
 No pressure. Just something my heart wanted you to know. ❤️`;
 
 
-// PAGE 1 -> PAGE 2
-function openLetter() {
+// PAGE NAVIGATION
+function nextPage(pageNumber) {
 
-    document.getElementById("opening").style.display = "none";
+    document.querySelectorAll(".page").forEach(page => {
+        page.classList.remove("active");
+    });
 
-    document.getElementById("confession").style.display = "block";
+    const next = document.getElementById("page" + pageNumber);
+
+    next.classList.remove("active");
+
+    // Restart entrance animation
+    void next.offsetWidth;
+
+    next.classList.add("active");
+
+}
+
+
+// TYPEWRITER EFFECT
+let typingStarted = false;
+
+function startTyping() {
+
+    if (typingStarted) return;
+
+    typingStarted = true;
 
     const text = document.getElementById("typed");
 
@@ -386,11 +445,11 @@ function openLetter() {
 
         if (i < confession.length) {
 
-            text.textContent += confession[i];
+            text.textContent += confession.charAt(i);
 
             i++;
 
-            setTimeout(type, 30);
+            setTimeout(type, 28);
 
         }
 
@@ -401,20 +460,22 @@ function openLetter() {
 }
 
 
-// PAGE 2 -> PAGE 3 -> PAGE 4
+// OPEN CONFESSION PAGE
+document.querySelector("#page1 button").addEventListener("click", () => {
+
+    nextPage(2);
+
+    startTyping();
+
+});
+
+
+// ANSWER HANDLER
 function answer(choice) {
-
-    document.querySelector(".question").style.display = "none";
-
-    document.querySelector(".choices").style.display = "none";
-
-    const response = document.getElementById("response");
 
     const title = document.getElementById("responseTitle");
 
     const text = document.getElementById("responseText");
-
-    response.style.display = "block";
 
     if (choice === "yes") {
 
@@ -434,14 +495,13 @@ function answer(choice) {
 
     }
 
-    // Show the final prank reveal after 3 seconds
+    // SHOW RESPONSE PAGE
+    nextPage(3);
+
+    // AUTOMATICALLY SHOW FINAL PAGE
     setTimeout(() => {
 
-        response.style.display = "none";
-
-        document.getElementById("confession").style.display = "none";
-
-        document.getElementById("finalPage").style.display = "block";
+        nextPage(4);
 
     }, 3000);
 
@@ -457,7 +517,7 @@ function celebrate() {
 
             const heart = document.createElement("div");
 
-            heart.innerHTML =
+            heart.textContent =
             ["♡", "♥", "✧", "💕"][
                 Math.floor(Math.random() * 4)
             ];
@@ -502,14 +562,14 @@ function celebrate() {
 }
 
 
-// FLOATING BACKGROUND PARTICLES
+// BACKGROUND PARTICLES
 setInterval(() => {
 
     const p = document.createElement("div");
 
     p.className = "particle";
 
-    p.innerHTML = Math.random() > .5 ? "♡" : "✧";
+    p.textContent = Math.random() > .5 ? "♡" : "✧";
 
     p.style.left = Math.random() * 100 + "vw";
 
